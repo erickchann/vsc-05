@@ -24,8 +24,10 @@
     </style>
 </head>
 <body>
-    <label for="number">Masukkan Jumlah Peserta:</label>
-    <input type="text" id="number" onchange="generateArray()">
+    <form action="">
+        <label for="number">Masukkan Jumlah Peserta:</label>
+        <input type="text" id="number" onchange="generateArray()">
+    </form>
 
     <h1>??</h1>
 
@@ -36,6 +38,9 @@
 const result = document.querySelector('h1');
 let nums = [];
 
+/** 
+ * Function to generate total participant 
+ */
 function generateArray() {
     const max = document.getElementById('number').value;
 
@@ -44,33 +49,39 @@ function generateArray() {
     }
 }
 
+/** 
+ * Function to rand the number 
+ */
 function randNum() {
-    result.style.color = 'black';
-
-    if (nums.length == 1) {
+    // Generate nums again if all num already show
+    if (nums.length <= 1) {
         nums = [];
         generateArray();
     }
 
+    let res = nums[Math.ceil(Math.random() * nums.length - 1)];
+    result.style.color = 'black';
+
+    // Make rand animation
     let interval = setInterval(() => {
         result.innerHTML = nums[Math.ceil(Math.random() * nums.length - 1)];
     }, 10);
 
+    // stop the animation
     setTimeout(() => {
         clearInterval(interval);
+    
+        result.innerHTML = res;
         result.style.color = 'green';
-        console.log(result.innerHTML)
-        setTimeout(() => {
-            const h1 = document.querySelector('h1');
-            const res = parseInt(h1.innerHTML);
 
-            nums.forEach((val, i) => {
-                if (val === res) {
-                    nums.splice(1, i);
-                }
-            });
-        }, 100);
-    }, 100);
+        const resNum = parseInt(res);
+
+        nums.forEach((val, i) => {
+            if (val === resNum) {
+                nums.splice(i, 1);
+            }
+        });
+    }, 3000);
 }
 </script>
 </body>
