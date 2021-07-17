@@ -81,12 +81,9 @@ document.addEventListener('mousemove', (e) => {
     if (e.clientX >= (w / 2) ) {
         tiltEffect = 'reverse';
     }
-
-    //   x = (-(e.offsetX - (w / 2)) / 3) / 3;
-    //   y = ((e.offsetY - (h / 2)) / 3) / 3;
  
-      x = (-(e.offsetX - (w / 2)) / 3) / 3;
-      y = ((e.offsetY - (h / 2)) / 3) / 3;
+    x = (-(e.offsetX - (w / 2)) / 3) / 3;
+    y = ((e.offsetY - (h / 2)) / 3) / 3;
 
     card.style.transform = `perspective(1000px) rotateX(${x}deg) rotateY(${y}deg)`;
 });
