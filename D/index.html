@@ -5,8 +5,120 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Part D</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 500px;
+            max-height: 500px;
+            position: relative;
+            margin: auto;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: black;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .item {
+            display: none;
+        }
+
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container">
+        <div class="item fade">
+            <img src="img/1.jpg" style="width: 100%;" alt="image">
+        </div>
+
+        <div class="item fade">
+            <img src="img/2.jpg" style="width: 100%;" alt="image">
+        </div>
+
+        <div class="item fade">
+            <img src="img/3.jpg" style="width: 100%;" alt="image">
+        </div>
+
+        <a class="prev" onclick="prev(-1)">&#10094;</a>
+        <a class="next" onclick="next(1)">&#10095;</a>
+    </div>
+
+<script>
+const prevB = document.querySelector('.prev');
+const nextB = document.querySelector('.next');
+
+let slideState = 1;
+showSlides(1);
+
+
+function next(n){
+	showSlides(slideState += n);
+}
+
+function prev(n){
+	showSlides(slideState = n);
+}
+
+function showSlides(n){
+    if (slideState == 3) {
+        nextB.style.display = 'none';
+    } else {
+        nextB.style.display = 'block';
+    }
+
+    if (slideState == 1) {
+        prevB.style.display = 'none';
+    } else {
+        prevB.style.display = 'block';
+    }
+
+	let slides = document.querySelectorAll(".item");
+
+	if (n > slides.length) slideState = 1;
+
+	if (n < 1) slideState = slides.length;
+
+	for (let i = 0; i < slides.length; i++)
+		slides[i].style.display = "none";	
+
+	slides[slideState-1].style.display = "block";
+}
+
+</script>
 </body>
 </html>
