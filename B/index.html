@@ -34,7 +34,7 @@
 <script>
 
 const result = document.querySelector('h1');
-const nums = [];
+let nums = [];
 
 function generateArray() {
     const max = document.getElementById('number').value;
@@ -47,6 +47,11 @@ function generateArray() {
 function randNum() {
     result.style.color = 'black';
 
+    if (nums.length == 1) {
+        nums = [];
+        generateArray();
+    }
+
     let interval = setInterval(() => {
         result.innerHTML = nums[Math.ceil(Math.random() * nums.length - 1)];
     }, 10);
@@ -54,17 +59,19 @@ function randNum() {
     setTimeout(() => {
         clearInterval(interval);
         result.style.color = 'green';
+        console.log(result.innerHTML)
+        setTimeout(() => {
+            const h1 = document.querySelector('h1');
+            const res = parseInt(h1.innerHTML);
 
-        let res = parseInt(result.innerHTML);
-        nums.forEach((val, i) => {
-            if (val == res) {
-                nums.splice(1, i);
-            }
-        });
-    }, 500);
+            nums.forEach((val, i) => {
+                if (val === res) {
+                    nums.splice(1, i);
+                }
+            });
+        }, 100);
+    }, 100);
 }
-
-
 </script>
 </body>
 </html>
