@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part C</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(53, 59, 72);
+            font-family: sans-serif;
+        }
+
+        .card {
+            width: 350px;
+            height: 150px;
+            background-color: white;
+            border-radius: 10px;
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 5px white;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+
+        .card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .info {
+            margin-left: 20px;
+        }
+
+        h2 {
+            margin: 5px 0;
+            color: rgb(53, 59, 72);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="img.jpg" alt="Person">
+
+        <div class="info">
+            <h2>Ress Rimit</h2>
+            <p>Web Developer, 19</p>
+        </div>
+    </div>
+
+<script>
+const card = document.querySelector('.card');
+
+document.addEventListener('mousemove', (e) => {
+
+    let w = document.body.clientWidth;
+    let h = document.body.clientHeight;
+
+    let x = 0;
+    let y = 0;
+
+    if (e.clientX >= (w / 2) ) {
+        tiltEffect = 'reverse';
+    }
+
+    //   x = (-(e.offsetX - (w / 2)) / 3) / 3;
+    //   y = ((e.offsetY - (h / 2)) / 3) / 3;
+ 
+      x = (-(e.offsetX - (w / 2)) / 3) / 3;
+      y = ((e.offsetY - (h / 2)) / 3) / 3;
+
+    card.style.transform = `perspective(1000px) rotateX(${x}deg) rotateY(${y}deg)`;
+});
+
+</script>
+</body>
+</html>
